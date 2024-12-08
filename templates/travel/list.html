@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282c34;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+
+        .container {
+            width: 70%;
+            margin: auto;
+        }
+
+        /* Link Styling */
+        .animated-link {
+            font-size: 13px;
+            text-decoration: none;
+            color: #61dafb;
+            padding: 5px;
+            border: 2px solid #61dafb;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .animated-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #61dafb;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .animated-link:hover {
+            color: #282c34;
+        }
+
+        .animated-link:hover::before {
+            transform: scaleX(1);
+        }
+
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #61dafb;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+            z-index: 10;
+        }
+
+        .container input{
+            width: 70%;
+            padding: 3px;
+
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+
+        <fieldset>
+            <legend style="text-align: center;"><h1>Travel List</h1></legend>
+
+            <a href="{% url 'home' %}" class="animated-link">Back to home</a>
+            <a href="{% url 'travel:form' %}" class="animated-link">Create Travel</a><br><br>
+
+            {% for person in travel %}
+
+                <ul>
+                    <li><a href="{{ person.get_detail_url }}"><h3>{{ person.title }}</h3></a></li>
+                </ul>
+
+            {% empty %}
+                <h3>No empty</h3>
+            {% endfor %}
+
+        </fieldset>
+    </div>
+</body>
+</html>

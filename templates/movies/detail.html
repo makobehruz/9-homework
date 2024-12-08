@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movies.title }}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282c34;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+
+        .container {
+            width: 70%;
+            margin: auto;
+        }
+
+        /* Link Styling */
+        .animated-link {
+            font-size: 13px;
+            text-decoration: none;
+            color: #61dafb;
+            padding: 5px;
+            border: 2px solid #61dafb;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .animated-link::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #61dafb;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+            z-index: -1;
+        }
+
+        .animated-link:hover {
+            color: #282c34;
+        }
+
+        .animated-link:hover::before {
+            transform: scaleX(1);
+        }
+
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #61dafb;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+            z-index: 10;
+        }
+
+        .container input{
+            width: 70%;
+            padding: 3px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <fieldset>
+
+            <legend style="text-align: center;"><h1>{{movies.title}}</h1></legend>
+
+            <p><strong>Director</strong>: {{ movies.director }}</p>
+            <p><strong>Release Year</strong>: {{ movies.release }}</p>
+            <p><strong>Genre</strong>: {{ movies.genre }}</p><br><br>
+
+            <a href="{{ movies.get_update_url }}" class="animated-link">Update</a>
+            <a href="{{ movies.get_delete_url }}" class="animated-link">Delete</a>
+            <a href="{% url 'movies:list' %}" class="animated-link">Back to list</a><br><br>
+
+        </fieldset>
+    </div>
+</body>
+</html>

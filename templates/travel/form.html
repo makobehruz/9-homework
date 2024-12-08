@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Form</title>
+
+        <style>
+
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #282c34;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0;
+                overflow: hidden;
+            }
+
+
+            .container {
+                width: 70%;
+                margin: auto;
+            }
+
+
+            .animated-link {
+                font-size: 13px;
+                text-decoration: none;
+                color: #61dafb;
+                padding: 5px;
+                border: 2px solid #61dafb;
+                border-radius: 5px;
+                position: relative;
+                overflow: hidden;
+                transition: color 0.3s ease, background-color 0.3s ease;
+            }
+
+            .animated-link::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #61dafb;
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.3s ease;
+                z-index: -1;
+            }
+
+            .animated-link:hover {
+                color: #282c34;
+            }
+
+            .animated-link:hover::before {
+                transform: scaleX(1);
+            }
+
+
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #61dafb;
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.5s ease;
+                z-index: 10;
+            }
+
+            .container input{
+                width: 70%;
+                padding: 3px;
+
+            }
+            .container textarea{
+                width: 70%;
+                padding: 3px;
+
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+             <form method="post">
+                {% csrf_token %}
+
+
+                <fieldset>
+                    <legend style="text-align: center;"><h1>{% if movies %} Update Travel {% else %} Creat Travel{% endif %}</h1></legend>
+
+
+
+
+                        <label for="title">Destination Name:<br><br>
+                            <input type="text" name="title" id="title" value = "{{ travel.title }}">
+                        </label><br><br>
+
+                        <label for="director">Country:<br><br>
+                            <input type="text" name="director" id="director" value = "{{ travel.director }}">
+                        </label><br><br>
+
+                        <label for="description">Description:<br><br>
+                            <textarea type="text" name="description" id="description">{{ travel.description }}</textarea>
+                        </label><br><br>
+
+                        <label for="genre">Genre:<br><br>
+                            <input type="text" name="genre" id="genre" value = "{{ travel.genre }}">
+                        </label><br><br><br>
+
+                        {% if travel %}
+                            <button type ='submit' class="animated-link"><a>Update</a></button><br><br>
+                             <a href="{{ travel.get_detail_url }}" class="animated-link">Back to detail</a><br><br><br>
+                        {% else %}
+                            <button type ='submit' class="animated-link"><a>Create</a></button><br><br>
+                            <a href="{% url 'travel:list' %}" class="animated-link">Back to list</a><br><br><br>
+                        {% endif %}
+
+
+
+
+                </fieldset>
+
+             </form>
+        </div>
+    </body>
+</html>
