@@ -112,7 +112,7 @@
 
                         {% if movies %}
                             <button type ='submit' class="animated-link"><a>Update</a></button><br><br>
-                             <a href="{{ movies.get_detail_url }}" class="animated-link">Back to detail</a><br><br><br>
+                            <a href="{{ movies.get_detail_url }}" class="animated-link">Back to detail</a><br><br><br>
                         {% else %}
                             <button type ='submit' class="animated-link"><a>Create</a></button><br><br>
                             <a href="{% url 'movies:list' %}" class="animated-link">Back to list</a><br><br><br>

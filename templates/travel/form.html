@@ -94,9 +94,7 @@
 
 
                 <fieldset>
-                    <legend style="text-align: center;"><h1>{% if movies %} Update Travel {% else %} Creat Travel{% endif %}</h1></legend>
-
-
+                        <legend style="text-align: center;"><h1>{% if travel %} Update Travel {% else %} Create Travel{% endif %}</h1></legend>
 
 
                         <label for="title">Destination Name:<br><br>
@@ -117,7 +115,7 @@
 
                         {% if travel %}
                             <button type ='submit' class="animated-link"><a>Update</a></button><br><br>
-                             <a href="{{ travel.get_detail_url }}" class="animated-link">Back to detail</a><br><br><br>
+                            <a href="{{ travel.get_detail_url }}" class="animated-link">Back to detail</a><br><br><br>
                         {% else %}
                             <button type ='submit' class="animated-link"><a>Create</a></button><br><br>
                             <a href="{% url 'travel:list' %}" class="animated-link">Back to list</a><br><br><br>
